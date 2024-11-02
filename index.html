@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleek Calculator</title>
+  <style>
+    /* Reset basic styling and set default font */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Center the calculator in the middle of the screen */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    /* Calculator container styling */
+    .calculator {
+      width: 320px;
+      padding: 20px;
+      background-color: #333;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Display screen styling */
+    .display {
+      width: 100%;
+      padding: 15px;
+      background-color: #222;
+      color: #fff;
+      font-size: 2em;
+      border: none;
+      border-radius: 10px;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    /* Button grid layout */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* Four columns */
+      gap: 10px; /* Spacing between buttons */
+    }
+
+    /* Basic button styling */
+    .button {
+      padding: 20px;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #444;
+      color: #fff;
+      transition: background-color 0.3s; /* Smooth color transition */
+    }
+
+    /* Button hover effect */
+    .button:hover {
+      background-color: #555;
+    }
+
+    /* Operator buttons have a distinct color */
+    .button.operator {
+      background-color: #f27a00;
+      color: #fff;
+    }
+
+    /* Operator button hover effect */
+    .button.operator:hover {
+      background-color: #f48c26;
+    }
+
+    /* Equal button has a unique color */
+    .button.equal {
+      background-color: #00b894;
+      color: #fff;
+    }
+
+    /* Equal button hover effect */
+    .button.equal:hover {
+      background-color: #00d1a0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Calculator structure -->
+  <div class="calculator">
+    <!-- Display input field for showing current input and result -->
+    <input type="text" id="display" class="display" disabled>
+    <!-- Button grid -->
+    <div class="buttons">
+      <!-- Number and operator buttons -->
+      <button class="button" onclick="append('7')">7</button>
+      <button class="button" onclick="append('8')">8</button>
+      <button class="button" onclick="append('9')">9</button>
+      <button class="button operator" onclick="append('/')">÷</button>
+
+      <button class="button" onclick="append('4')">4</button>
+      <button class="button" onclick="append('5')">5</button>
+      <button class="button" onclick="append('6')">6</button>
+      <button class="button operator" onclick="append('*')">×</button>
+
+      <button class="button" onclick="append('1')">1</button>
+      <button class="button" onclick="append('2')">2</button>
+      <button class="button" onclick="append('3')">3</button>
+      <button class="button operator" onclick="append('-')">-</button>
+
+      <button class="button" onclick="append('0')">0</button>
+      <button class="button" onclick="append('.')">.</button>
+      <button class="button equal" onclick="calculate()">=</button>
+      <button class="button operator" onclick="append('+')">+</button>
+
+      <!-- Clear and backspace buttons spanning two columns each -->
+      <button class="button" style="grid-column: span 2;" onclick="clearDisplay()">C</button>
+      <button class="button" style="grid-column: span 2;" onclick="backspace()">←</button>
+    </div>
+  </div>
+
+  <script>
+    // Reference to the display input element
+    const display = document.getElementById('display');
+
+    // Function to append a character to the display
+    function append(value) {
+      display.value += value;
+    }
+
+    // Function to clear the display
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    // Function to remove the last character from the display
+    function backspace() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    // Function to calculate the result of the current expression
+    function calculate() {
+      try {
+        // Use eval to evaluate the expression in the display
+        display.value = eval(display.value) || "";
+      } catch {
+        // Display 'Error' if the calculation fails
+        display.value = 'Error';
+      }
+    }
+  </script>
+
+</body>
+</html>
